@@ -16,20 +16,75 @@ html, body {
 }
 
 body {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   text-align: center;
   padding: 2rem;
 }
 
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(6px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.logo {
+  font-weight: 800;
+  color: #222;
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
 .hero {
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.8);
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   padding: 3rem 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   backdrop-filter: blur(8px);
+  margin: 1.5rem 0;
 }
 
 .hero h1 {
@@ -64,3 +119,71 @@ body {
 .cta-button:active {
   transform: translateY(0);
 }
+
+.cta-button.ghost {
+  background: transparent;
+  color: #333;
+  border: 2px solid rgba(0,0,0,0.08);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.features {
+  margin: 2rem 0 1rem 0;
+}
+
+.features h2,
+.about h2,
+.contact h2 {
+  margin-bottom: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: rgba(255,255,255,0.85);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.about,
+.contact {
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.contact form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.contact label { display: flex; flex-direction: column; text-align: left; font-weight:600; }
+.contact input, .contact textarea { padding: 0.5rem; border-radius:6px; border:1px solid #ddd; margin-top:0.25rem; }
+.form-status { margin-top:0.5rem; color: #116644; font-weight:600; }
+
+.site-footer { padding: 1rem 0; color: #222; }
+
+@media (max-width: 800px) {
+  .cards { grid-template-columns: 1fr; }
+  .nav { display: none; }
+  .nav-toggle { display: block; }
+  .header-inner { align-items: center; }
+}
+
+/* Dark theme toggle */
+body.dark { background: linear-gradient(135deg, #2b2f3a 0%, #1f2328 100%); color: #eee; }
+body.dark .hero, body.dark .about, body.dark .contact, body.dark .card { background: rgba(20,20,24,0.7); color: #e6e6e6; }
+body.dark .cta-button { background: #ff8b7b; }

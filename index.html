@@ -12,11 +12,78 @@
 </head>
 
 <body>
-    <header class="hero">
-        <h1>I Dont Like This</h1>
-        <p class="subtitle">Add some cool stuff.</p>
-        <button class="cta-button">Get Started</button>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="/">I Dont Like This</a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+            <nav class="nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+
+    <main>
+        <section class="hero">
+            <h1>I Dont Like This</h1>
+            <p class="subtitle">Add some cool stuff.</p>
+            <div class="hero-actions">
+                <a class="cta-button" href="#features">Explore Features</a>
+                <button class="cta-button ghost" id="themeToggle">Toggle Theme</button>
+            </div>
+        </section>
+
+        <section id="features" class="features container">
+            <h2>Features</h2>
+            <div class="cards">
+                <article class="card">
+                    <h3>Simple Design</h3>
+                    <p>Clean, responsive layout that adapts to any screen.</p>
+                </article>
+                <article class="card">
+                    <h3>Interactive</h3>
+                    <p>Small JS enhancements for better UX.</p>
+                </article>
+                <article class="card">
+                    <h3>Contact</h3>
+                    <p>Submit feedback or get in touch quickly.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="about container">
+            <h2>About</h2>
+            <p>Quick note about the purpose of this site. Keep or replace as needed.</p>
+        </section>
+
+        <section id="contact" class="contact container">
+            <h2>Contact</h2>
+            <form id="contactForm">
+                <label>Name
+                    <input type="text" name="name" required>
+                </label>
+                <label>Email
+                    <input type="email" name="email" required>
+                </label>
+                <label>Message
+                    <textarea name="message" rows="4" required></textarea>
+                </label>
+                <button type="submit" class="cta-button">Send Message</button>
+                <p class="form-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 I Dont Like This</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
