@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		navToggle.addEventListener('click', () => {
 			const expanded = navToggle.getAttribute('aria-expanded') === 'true';
 			navToggle.setAttribute('aria-expanded', String(!expanded));
-			nav.style.display = expanded ? 'none' : 'block';
+			nav.classList.toggle('open');
 		});
 	}
 
@@ -30,18 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	// Simple contact form handling (client-side only)
-	const contactForm = document.getElementById('contactForm');
-	if (contactForm) {
-		contactForm.addEventListener('submit', (e) => {
-			e.preventDefault();
-			const status = contactForm.querySelector('.form-status');
-			status.textContent = 'Sending message...';
-			// Simulate async send
-			setTimeout(() => {
-				status.textContent = 'Thanks — message received (demo only).';
-				contactForm.reset();
-			}, 800);
-		});
-	}
+	// Contact form removed — no client-side handling required
 });

@@ -69,6 +69,10 @@ body {
   font-weight: 600;
 }
 
+.nav { display: flex; align-items: center; }
+.nav ul { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; }
+.nav.open { display: block; }
+
 .nav-toggle {
   display: none;
   background: transparent;
@@ -137,8 +141,7 @@ body {
 }
 
 .features h2,
-.about h2,
-.contact h2 {
+.about h2 {
   margin-bottom: 1rem;
 }
 
@@ -157,22 +160,12 @@ body {
   text-align: left;
 }
 
-.about,
-.contact {
+.about {
   background: rgba(255,255,255,0.85);
   border-radius: 8px;
   padding: 1.25rem;
   margin: 1rem 0 2rem 0;
 }
-
-.contact form {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.contact label { display: flex; flex-direction: column; text-align: left; font-weight:600; }
-.contact input, .contact textarea { padding: 0.5rem; border-radius:6px; border:1px solid #ddd; margin-top:0.25rem; }
-.form-status { margin-top:0.5rem; color: #116644; font-weight:600; }
 
 .site-footer { padding: 1rem 0; color: #222; }
 
@@ -185,5 +178,5 @@ body {
 
 /* Dark theme toggle */
 body.dark { background: linear-gradient(135deg, #2b2f3a 0%, #1f2328 100%); color: #eee; }
-body.dark .hero, body.dark .about, body.dark .contact, body.dark .card { background: rgba(20,20,24,0.7); color: #e6e6e6; }
+body.dark .hero, body.dark .about, body.dark .card { background: rgba(20,20,24,0.7); color: #e6e6e6; }
 body.dark .cta-button { background: #ff8b7b; }
