@@ -11,13 +11,13 @@
         "text": "Scheduled maintenance tonight 11pm-12am.",
         "animation": "flashing",
         "background": "rgb(255,240,240)",
-        "textColor": "rgb(122,27,27)"
+        "textColor": "rgb(193, 212, 55)"
     },
     {
         "name": "Vibe",
         "text": "We shipped a tiny update. Enjoy the vibes.",
         "animation": "vibrating",
         "background": "rgb(249,252,255)",
-        "textColor": "rgb(31,51,69)"
+        "textColor": "rgb(255, 110, 0)"
     }
 ] 
