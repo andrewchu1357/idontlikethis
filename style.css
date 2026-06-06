@@ -20,7 +20,7 @@
   --radius:       12px;
   --radius-lg:    20px;
   --shadow:       0 14px 50px rgba(51,63,87,0.12);
-  --header-h:     120px;
+  --header-h:     100px;
   --transition:   0.22s ease;
 }
 
@@ -204,6 +204,10 @@ body {
   background: var(--surface-2) !important;
   color: var(--text) !important;
   transform: none !important;
+}
+.nav-contact-btn[aria-current="page"] {
+  background: rgba(79,125,243,0.14) !important;
+  color: var(--accent-2) !important;
 }
 
 /* ── Hamburger ── */
