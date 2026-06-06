@@ -21,6 +21,7 @@
   --radius-lg:    20px;
   --shadow:       0 14px 50px rgba(51,63,87,0.12);
   --header-h:     100px;
+  --banner-h:     0px;
   --transition:   0.22s ease;
 }
 
@@ -33,7 +34,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-h);
+  /* Account for fixed header + dynamic banners when scrolling to anchors */
+  scroll-padding-top: calc(var(--header-h) + var(--banner-h));
 }
 
 html, body {

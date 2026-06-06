@@ -98,6 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
 					wrapper.appendChild(span);
 					bannerRoot.appendChild(wrapper);
 				});
+					// update CSS variable for banner height so scroll offsets work correctly
+					const updateBannerHeight = () => {
+						const h = bannerRoot ? bannerRoot.offsetHeight : 0;
+						document.documentElement.style.setProperty('--banner-h', h + 'px');
+					};
+					updateBannerHeight();
+					// update on window resize in case banners wrap/change height
+					window.addEventListener('resize', updateBannerHeight);
 				})
 			.catch(() => { /* fail silently */ });
 	})();
