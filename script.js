@@ -81,20 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			.then(data => {
 				const items = Array.isArray(data) ? data : [data];
 				if (!items.length) return;
-				const item = items[0];
-				const name = item.name ? item.name.trim() : '';
-				const text = item.text ? item.text.trim() : '';
-				const anim = (item.animation || 'rolling').toLowerCase();
-				const allowed = ['rolling','flashing','vibrating'];
-				const mode = allowed.includes(anim) ? anim : 'rolling';
-				const wrapper = document.createElement('div');
-				wrapper.className = 'banner-item banner--' + mode;
-				const span = document.createElement('span');
-				span.className = 'banner-text';
-				span.textContent = (name ? name + ' — ' : '') + text;
-				wrapper.appendChild(span);
-				bannerRoot.appendChild(wrapper);
-			})
+				items.forEach(item => {
+					const name = item.name ? item.name.trim() : '';
+					const text = item.text ? item.text.trim() : '';
+					const anim = (item.animation || 'rolling').toLowerCase();
+					const allowed = ['rolling','flashing','vibrating'];
+					const mode = allowed.includes(anim) ? anim : 'rolling';
+					const wrapper = document.createElement('div');
+					wrapper.className = 'banner-item banner--' + mode;
+					const span = document.createElement('span');
+					span.className = 'banner-text';
+					span.textContent = (name ? name + ' — ' : '') + text;
+					wrapper.appendChild(span);
+					bannerRoot.appendChild(wrapper);
+				});
+				})
 			.catch(() => { /* fail silently */ });
 	})();
 });
