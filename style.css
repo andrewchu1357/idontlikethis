@@ -162,6 +162,17 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translateX(0); }
 }
 
+/* Make banner items clickable when wrapped in links */
+.site-banner .banner-item a {
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.site-banner .banner-item a:hover { opacity: 0.96; }
+.site-banner .banner-item a .banner-text { display: inline-block; width: 100%; }
+
 body {
   min-height: 100vh;
   display: flex;

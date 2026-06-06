@@ -92,10 +92,23 @@ document.addEventListener('DOMContentLoaded', () => {
 					// Apply optional background and text color (accept any CSS color string, e.g., "rgb(255,0,0)")
 					if (item.background) wrapper.style.background = item.background;
 					if (item.textColor) wrapper.style.color = item.textColor;
-					const span = document.createElement('span');
-					span.className = 'banner-text';
-					span.textContent = (name ? name + ' — ' : '') + text;
-					wrapper.appendChild(span);
+				let contentParent = wrapper;
+				if (item.url) {
+					const a = document.createElement('a');
+					a.className = 'banner-link';
+					a.href = item.url;
+					// optional target handling
+					if (item.target && item.target === '_blank') {
+						a.target = '_blank';
+						a.rel = 'noopener noreferrer';
+					}
+					wrapper.appendChild(a);
+					contentParent = a;
+				}
+				const span = document.createElement('span');
+				span.className = 'banner-text';
+				span.textContent = (name ? name + ' — ' : '') + text;
+				contentParent.appendChild(span);
 					bannerRoot.appendChild(wrapper);
 				});
 					// update CSS variable for banner height so scroll offsets work correctly
