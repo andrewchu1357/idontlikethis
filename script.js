@@ -89,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					const mode = allowed.includes(anim) ? anim : 'rolling';
 					const wrapper = document.createElement('div');
 					wrapper.className = 'banner-item banner--' + mode;
+					// Apply optional background and text color (accept any CSS color string, e.g., "rgb(255,0,0)")
+					if (item.background) wrapper.style.background = item.background;
+					if (item.textColor) wrapper.style.color = item.textColor;
 					const span = document.createElement('span');
 					span.className = 'banner-text';
 					span.textContent = (name ? name + ' — ' : '') + text;
