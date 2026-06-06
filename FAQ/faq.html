@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FAQ — I Dont Like This">
+  <title>FAQ — I Dont Like This</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .faq-item {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      padding: 1.1rem 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: rgba(255,255,255,0.05); }
+    .faq-chevron {
+      font-size: 0.75rem;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      padding: 0 1.25rem;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 1.25rem 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="../Products/products.html">Products</a></li>
+            <li><a href="../Our Story/story.html">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="../index.html">I Dont Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="faq.html" aria-current="page">FAQ</a></li>
+            <li><a href="../contacts/contact.html" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="../Products/products.html">Products</a></li>
+      <li><a href="../Our Story/story.html">Our Story</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="../contacts/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="contact-section">
+      <div class="contact-card" style="max-width:640px; text-align:left;">
+        <div class="hero-badge" style="margin-bottom:1.5rem; display:inline-block;">❓ Common Questions</div>
+        <h1 style="text-align:center;">FAQ</h1>
+
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is I Dont Like This?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              I Dont Like This is a bold, honest platform for people who say what they actually think. No filters, no fluff — just real takes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How can I get in touch?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Head to our <a href="../contacts/contact.html" style="color:var(--accent-2);">Contact page</a> to find us on GitHub or visit ispex.cloud.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Is this site open source?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Yes! You can find the source code on <a href="https://github.com/andrewchu1357" target="_blank" rel="noopener" style="color:var(--accent-2);">GitHub @andrewchu1357</a>.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What products do you offer?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              We're actively building. Check out the <a href="../Products/products.html" style="color:var(--accent-2);">Products page</a> for the latest updates.
+            </div>
+          </div>
+
+        </div>
+
+        <a class="contact-back" href="../index.html" style="margin-top:2rem; display:inline-block;">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">I Dont Like This</div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+  </script>
+</body>
+</html>
