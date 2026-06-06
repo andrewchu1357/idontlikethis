@@ -1,0 +1,28 @@
+## Example of Banner.json code:
+[
+    {
+        "name": "Promo",
+        "text": "New features live — check the Products page!",
+        "animation": "rolling",
+        "background": "rgb(193, 245, 194)",
+        "textColor": "rgb(193, 245, 55)",
+        "url": "/products/"
+    },
+    {
+        "name": "Alert",
+        "text": "Scheduled maintenance tonight 11pm-12am.",
+        "animation": "flashing",
+        "background": "rgb(255, 240, 240)",
+        "textColor": "rgb(122,27,27)",
+        "url": "/contact/"
+    },
+    {
+        "name": "Vibe",
+        "text": "We shipped a tiny update. Enjoy the vibes.",
+        "animation": "vibrating",
+        "background": "rgb(249,252,255)",
+        "textColor": "rgb(31,51,69)",
+        "url": "/blog/"
+    }
+] 
+--------------------------------------------------------------------
