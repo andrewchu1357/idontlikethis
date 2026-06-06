@@ -97,6 +97,68 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid rgba(96,103,136,0.12);
 }
 
+/* ── Site Banner (loaded from banner.json) ── */
+.site-banner {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  z-index: 99;
+}
+.site-banner .banner-item {
+  max-width: 1100px;
+  width: 100%;
+  padding: 0.35rem 0.75rem;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Rolling marquee */
+.banner--rolling {
+  background: linear-gradient(90deg, rgba(79,125,243,0.08), rgba(135,167,255,0.06));
+  overflow: hidden;
+}
+.banner--rolling .banner-text {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: banner-roll 12s linear infinite;
+}
+@keyframes banner-roll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Flashing attention */
+.banner--flashing {
+  background: linear-gradient(90deg, rgba(255,230,230,0.98), rgba(255,245,245,0.98));
+  color: #7a1b1b;
+  animation: banner-flash 1.2s steps(2, start) infinite;
+}
+@keyframes banner-flash {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+/* Vibrating micro-interaction */
+.banner--vibrating {
+  background: linear-gradient(90deg, rgba(240,248,255,0.9), rgba(255,255,255,0.9));
+}
+.banner--vibrating .banner-text { display: inline-block; animation: banner-vibe 0.12s linear infinite; }
+@keyframes banner-vibe {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-1px) translateY(0); }
+  50% { transform: translateX(1px) translateY(-1px); }
+  75% { transform: translateX(-1px) translateY(1px); }
+  100% { transform: translateX(0); }
+}
+
 body {
   min-height: 100vh;
   display: flex;

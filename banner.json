@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Promo",
+        "text": "New features live — check the Products page!",
+        "animation": "rolling"
+    },
+    {
+        "name": "Alert",
+        "text": "Scheduled maintenance tonight 11pm-12am.",
+        "animation": "flashing"
+    },
+    {
+        "name": "Vibe",
+        "text": "We shipped a tiny update. Enjoy the vibes.",
+        "animation": "vibrating"
+    }
+]
