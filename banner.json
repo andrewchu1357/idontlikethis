@@ -3,8 +3,8 @@
         "name": "Promo",
         "text": "New features live — check the Products page!",
         "animation": "rolling",
-        "background": "rgb(235,245,255)",
-        "textColor": "rgb(31,51,69)",
+        "background": "rgb(193, 245, 194)",
+        "textColor": "rgb(193, 245, 55)",
         "url": "/products/"
     },
     {
