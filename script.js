@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (mode === 'rolling') {
 					const track = document.createElement('div');
 					track.className = 'banner-track';
-					for (let i = 0; i < 2; i += 1) {
+					for (let i = 0; i < 4; i += 1) {
 						const span = document.createElement('span');
 						span.className = 'banner-text';
 						span.textContent = (name ? name + ' — ' : '') + text;

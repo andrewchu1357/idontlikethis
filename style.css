@@ -139,7 +139,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
   white-space: nowrap;
   flex-shrink: 0;
-  padding-right: 80px; /* gap between repeats */
+  padding-right: 40px; /* gap between repeats */
 }
 @keyframes banner-roll {
   0%   { transform: translateX(0); }
