@@ -105,10 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
 					wrapper.appendChild(a);
 					contentParent = a;
 				}
-				const span = document.createElement('span');
-				span.className = 'banner-text';
-				span.textContent = (name ? name + ' — ' : '') + text;
-				contentParent.appendChild(span);
+				if (mode === 'rolling') {
+					const track = document.createElement('div');
+					track.className = 'banner-track';
+					for (let i = 0; i < 2; i += 1) {
+						const span = document.createElement('span');
+						span.className = 'banner-text';
+						span.textContent = (name ? name + ' — ' : '') + text;
+						track.appendChild(span);
+					}
+					contentParent.appendChild(track);
+				} else {
+					const span = document.createElement('span');
+					span.className = 'banner-text';
+					span.textContent = (name ? name + ' — ' : '') + text;
+					contentParent.appendChild(span);
+				}
 					bannerRoot.appendChild(wrapper);
 				});
 					// update CSS variable for banner height so scroll offsets work correctly

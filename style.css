@@ -127,16 +127,20 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(90deg, rgba(79,125,243,0.08), rgba(135,167,255,0.06));
   overflow: hidden;
 }
-.banner--rolling .banner-text {
-  display: inline-block;
+.banner--rolling .banner-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
   white-space: nowrap;
   will-change: transform;
-  animation: banner-roll 2s linear infinite;
+  animation: banner-roll 12s linear infinite;
+}
+.banner--rolling .banner-text {
+  display: inline-block;
 }
 @keyframes banner-roll {
-  0% { transform: translateX(120%); }
-  88% { transform: translateX(-100%); }
-  100% { transform: translateX(-100%); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Flashing attention */
