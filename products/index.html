@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Products — I Dont Like This">
+  <title>Products — I Dont Like This</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="/products/" aria-current="page">Products</a></li>
+            <li><a href="/story/">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="/">I Dont Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="/products/">Products</a></li>
+      <li><a href="/story/">Our Story</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="hero-content">
+        <h1>Products</h1>
+        <p class="subtitle">Tools, features, and honest ideas designed for people who want something real.</p>
+        <div class="hero-actions">
+          <a class="cta-button primary" href="/contact/">Contact</a>
+          <a class="cta-button ghost" href="/faq/">See FAQ</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll Down</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="section-container">
+        <div class="section-label">What We Offer</div>
+        <h2>Products</h2>
+        <p class="section-subtitle">Concrete offerings with straightforward value, built for people who prefer clarity over flash.</p>
+        <div class="cards">
+          <article class="card">
+            <span class="card-icon">🛠️</span>
+            <h3>Simple tools</h3>
+            <p>No gimmicks — products that work, look clean, and are easy to use.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">🚀</span>
+            <h3>Fast delivery</h3>
+            <p>Focused launches and rapid updates keep things moving without overcomplication.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">🔎</span>
+            <h3>Honest design</h3>
+            <p>Built with transparency, bold messaging, and thoughtful structure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">I Dont Like This</div>
+      <div class="footer-copy">© 2026 I Dont Like This. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
