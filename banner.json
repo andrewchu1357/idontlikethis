@@ -1,26 +1,11 @@
 [
     {
         "name": "Promo",
-        "text": "New features live — check the Products page!",
+        "text": "Maintnence TONIGHT at 5:00PM - 9:00PM. Expect errors",
         "animation": "rolling",
-        "background": "rgb(193, 245, 194)",
-        "textColor": "rgb(193, 245, 55)",
+        "background": "rgba(128, 13, 55, 0.729)",
+        "textColor": "rgb(255, 251, 0)",
         "url": "/products/"
-    },
-    {
-        "name": "Alert",
-        "text": "Scheduled maintenance tonight 11pm-12am.",
-        "animation": "flashing",
-        "background": "rgb(255, 240, 240)",
-        "textColor": "rgb(122,27,27)",
-        "url": "/contact/"
-    },
-    {
-        "name": "Vibe",
-        "text": "We shipped a tiny update. Enjoy the vibes.",
-        "animation": "vibrating",
-        "background": "rgb(249,252,255)",
-        "textColor": "rgb(31,51,69)",
-        "url": "/blog/"
     }
+
 ] 
