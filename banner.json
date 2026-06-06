@@ -1,6 +1,6 @@
 [
     {
-        "name": "Promo",
+        "name": "Notice",
         "text": "Maintnence TONIGHT at 5:00PM - 9:00PM. Expect errors",
         "animation": "rolling",
         "background": "rgba(128, 13, 55, 0.729)",
