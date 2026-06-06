@@ -1,35 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - I Dont Like This</title>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact I Dont Like This — reach out via ispex.cloud or GitHub.">
+  <title>Contact — I Dont Like This</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="logo" href="../index.html">I Dont Like This</a>
+
+  <!-- Sticky Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-icon">⚡</span> I Dont Like This
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="contact.html" class="nav-contact-btn" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="../index.html#features">Features</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="contact-section">
+      <div class="contact-card">
+        <div class="hero-badge" style="margin-bottom:1.5rem;">📬 Get In Touch</div>
+        <h1>Contact</h1>
+        <p>Feel free to explore our resources or reach out via the links below.</p>
+
+        <div class="contact-links">
+          <a class="contact-link-btn" href="https://ispex.cloud" target="_blank" rel="noopener">
+            <span class="btn-icon">🌐</span>
+            Visit ispex.cloud
+          </a>
+          <a class="contact-link-btn" href="https://github.com/andrewchu1357" target="_blank" rel="noopener">
+            <span class="btn-icon">🐙</span>
+            GitHub: andrewchu1357
+          </a>
         </div>
-    </header>
-    <main>
-        <section class="hero">
-            <h1>Contact</h1>
-            <p>Feel free to explore our resources or reach out via the links below.</p>
-            <div class="hero-actions">
-                <a class="cta-button" href="https://ispex.cloud" target="_blank" rel="noopener">Visit ispex.cloud</a>
-                <a class="cta-button" href="https://github.com/andrewchu1357" target="_blank" rel="noopener">GitHub: Andrewchu1357</a>
-                <a class="cta-button ghost" href="../index.html">Home</a>
-            </div>
-        </section>
-    </main>
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2026 I Dont Like This</p>
-        </div>
-    </footer>
-    <script src="../script.js"></script>
+
+        <a class="contact-back" href="../index.html">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">⚡ I Dont Like This</div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#about">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2026 I Dont Like This. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
 </html>
