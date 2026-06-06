@@ -137,6 +137,12 @@ a { color: inherit; text-decoration: none; }
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
+.banner--rolling .banner-text {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: banner-roll 5s linear infinite;
+}
 
 /* Flashing attention */
 .banner--flashing {
