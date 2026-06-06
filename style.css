@@ -134,14 +134,9 @@ a { color: inherit; text-decoration: none; }
   animation: banner-roll 12s linear infinite;
 }
 @keyframes banner-roll {
-  0% { transform: translateX(100%); }
+  0% { transform: translateX(120%); }
+  88% { transform: translateX(-100%); }
   100% { transform: translateX(-100%); }
-}
-.banner--rolling .banner-text {
-  display: inline-block;
-  white-space: nowrap;
-  will-change: transform;
-  animation: banner-roll 5s linear infinite;
 }
 
 /* Flashing attention */
