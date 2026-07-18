@@ -3,67 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FAQ — I Dont Like This">
-  <title>FAQ — I Dont Like This</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="FAQ — I Don't Like This. Frequently asked questions, reluctantly answered.">
+  <title>FAQ — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
-  <style>
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 2rem;
-      text-align: left;
-    }
-    .faq-item {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.97rem;
-      font-weight: 600;
-      padding: 1.1rem 1.25rem;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      transition: background var(--transition);
-    }
-    .faq-question:hover { background: rgba(96,103,136,0.08); }
-    .faq-chevron {
-      font-size: 0.75rem;
-      transition: transform 0.25s ease;
-      flex-shrink: 0;
-    }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.7;
-      padding: 0 1.25rem;
-    }
-    .faq-item.open .faq-answer {
-      max-height: 300px;
-      padding: 0 1.25rem 1.1rem;
-    }
-  </style>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
 </head>
 <body>
 
-  <header class="site-header">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <div class="header-left">
         <nav class="nav" aria-label="Left navigation">
@@ -73,7 +34,7 @@
           </ul>
         </nav>
       </div>
-      <a class="logo" href="/">I Dont Like This</a>
+      <a class="logo" href="/">I Don't Like This</a>
       <div class="header-right">
         <nav class="nav" aria-label="Right navigation">
           <ul>
@@ -81,6 +42,11 @@
             <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
           </ul>
         </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -101,17 +67,29 @@
   </nav>
 
   <main>
-    <section class="contact-section">
-      <div class="contact-card" style="max-width:640px; text-align:left;">
-        <h1 style="text-align:center;">FAQ</h1>
-        <div class="faq-list" id="faqList">
+    <section class="page-section">
+      <div class="page-card">
+        <div class="section-label" data-reveal>Reluctantly answered</div>
+        <h1 data-reveal>Frequently asked questions</h1>
+        <p class="lede" data-reveal>Nobody has actually asked these. We wrote them anyway, which tells you a lot about us.</p>
+
+        <div class="faq-list" id="faqList" data-reveal>
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
-              What is I Dont Like This?
+              What is I Don't Like This?
               <span class="faq-chevron">▼</span>
             </button>
             <div class="faq-answer">
-              I Dont Like This is a bold, honest platform for people who say what they actually think. No filters, no fluff — just real takes.
+              A website about not liking things. It has a dislike button, a list of things we dislike, and a refreshing absence of hype. That's the whole product.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Do you like anything?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Yes: fast pages, honest copy, dark mode, and websites that don't ask for your email address within four seconds of arriving. We contain multitudes.
             </div>
           </div>
           <div class="faq-item">
@@ -120,16 +98,7 @@
               <span class="faq-chevron">▼</span>
             </button>
             <div class="faq-answer">
-              Head to our <a href="/contact/" style="color:var(--accent-2);">Contact page</a> to find us on GitHub or visit ispex.cloud.
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              What do you build?
-              <span class="faq-chevron">▼</span>
-            </button>
-            <div class="faq-answer">
-              We create honest web experiences, tools, and content that lean into clarity, not clutter.
+              Head to the <a href="/contact/">Contact page</a> to find us on GitHub or visit ispex.cloud. We read everything, including the mean stuff. Especially the mean stuff.
             </div>
           </div>
           <div class="faq-item">
@@ -138,37 +107,44 @@
               <span class="faq-chevron">▼</span>
             </button>
             <div class="faq-answer">
-              Absolutely. Check out the <a href="/products/" style="color:var(--accent-2);">Products page</a> for the latest updates.
+              Check the <a href="/products/">Products page</a> for the current inventory (one item) and the <a href="/updates/">Updates page</a> for the changelog.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Why does the dislike counter only count my own clicks?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Because this is a static site with no backend, your dislikes are stored in your own browser. Think of it as a private journal of disapproval.
             </div>
           </div>
         </div>
-        <a class="contact-back" href="/" style="margin-top:2rem; display:inline-block;">← Back to Home</a>
+
+        <a class="contact-back" href="/">← Back to Home</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">I Dont Like This</div>
-      <div class="footer-copy">© 2026 I Dont Like This. All rights reserved.</div>
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/products/">Products</a>
+        <a href="/story/">Story</a>
+        <a href="/updates/">Updates</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
   <script src="../script.js"></script>
-  <script>
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const item = this.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
-        if (!isOpen) {
-          item.classList.add('open');
-          this.setAttribute('aria-expanded', 'true');
-        } else {
-          this.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-  </script>
 </body>
 </html>

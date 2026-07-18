@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Our Story — I Dont Like This">
-  <title>Our Story — I Dont Like This</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Our Story — I Don't Like This. Built out of spite, maintained out of habit.">
+  <title>Our Story — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
 </head>
 <body>
 
-  <header class="site-header">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <div class="header-left">
         <nav class="nav" aria-label="Left navigation">
@@ -22,7 +34,7 @@
           </ul>
         </nav>
       </div>
-      <a class="logo" href="/">I Dont Like This</a>
+      <a class="logo" href="/">I Don't Like This</a>
       <div class="header-right">
         <nav class="nav" aria-label="Right navigation">
           <ul>
@@ -30,6 +42,11 @@
             <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
           </ul>
         </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -50,22 +67,40 @@
   </nav>
 
   <main>
-    <section class="contact-section">
-      <div class="contact-card" style="max-width:720px; text-align:left;">
-        <h1>Our Story</h1>
-        <p>We started this site in a coffee shop during a slow Friday afternoon, when the founders got tired of polished marketing language and wanted something more honest.</p>
-        <p>From the beginning, the idea was simple: publish real opinions, useful insights, and no-nonsense updates. We built this place for people who value clarity over hype.</p>
-        <p>Today, we keep the same spirit. Every page, every word, and every feature is meant to feel direct, easy to understand, and refreshingly genuine.</p>
+    <section class="page-section">
+      <div class="page-card">
+        <div class="section-label" data-reveal>The origin</div>
+        <h1 data-reveal>Our story</h1>
+        <div class="story-body" data-reveal>
+          <p>We started this site in a coffee shop during a slow Friday afternoon, when we got tired of polished marketing language and wanted something more honest.</p>
+          <p>From the beginning, the idea was simple: publish real opinions, useful insights, and no-nonsense updates. No "revolutionizing", no "disrupting", no "empowering communities at scale". Just a website that says what it means — even when what it means is "we don't like this".</p>
+          <p>Today, we keep the same spirit. Every page, every word, and every feature is meant to feel direct, easy to understand, and refreshingly genuine. If we ever add a newsletter popup, you have permission to close the tab forever.</p>
+        </div>
+        <div style="margin-top: 2.5rem;" data-reveal>
+          <a class="cta-button primary" href="/#dislike">Go dislike something →</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">I Dont Like This</div>
-      <div class="footer-copy">© 2026 I Dont Like This. All rights reserved.</div>
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/products/">Products</a>
+        <a href="/story/">Story</a>
+        <a href="/updates/">Updates</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
     </div>
   </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
   <script src="../script.js"></script>
 </body>
