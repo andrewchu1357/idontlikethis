@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The I Don't Like This Button — press it and it says it for you. Info, specs, and how to get started.">
+  <title>The Button — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
+  <style>
+    .button-hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+    .button-hero .section-label { justify-content: center; }
+    .button-hero .section-label::before { display: none; }
+    .button-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .button-hero .subtitle { margin-bottom: 3.5rem; }
+
+    /* The big red button */
+    .mega-button-wrap {
+      display: inline-block;
+      position: relative;
+    }
+    .mega-button {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid var(--border);
+      background: var(--accent);
+      color: #faf8f3;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 0 var(--border);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background var(--transition);
+      user-select: none;
+      -webkit-user-select: none;
+      line-height: 1.4;
+      padding: 1rem;
+    }
+    .mega-button:hover { background: var(--accent-2); }
+    .mega-button:active,
+    .mega-button.pressed {
+      transform: translateY(8px);
+      box-shadow: 0 2px 0 var(--border);
+    }
+    .mega-button-caption {
+      margin-top: 2.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .mega-button-caption strong {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .speech-bubble {
+      position: absolute;
+      top: -1.4rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.4);
+    }
+    .speech-bubble.talking {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .button-info {
+      padding: 5rem 0 6rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
+
+    .specs {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+    }
+    .specs h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .specs dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.6rem 2rem;
+      font-size: 0.92rem;
+    }
+    .specs dt {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding-top: 0.2rem;
+    }
+    .specs dd { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="/products/" aria-current="page">Products</a></li>
+            <li><a href="/story/">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="/">I Don't Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="/products/">Products</a></li>
+      <li><a href="/story/">Our Story</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="button-hero">
+      <div class="section-container">
+        <div class="section-label" data-reveal>Product No. 02</div>
+        <h1 data-reveal>The I Don't Like This Button</h1>
+        <p class="subtitle" data-reveal style="max-width: 520px; margin-left: auto; margin-right: auto;">Sometimes saying it out loud is too much effort. Press the button and it says it for you. Out loud. Every time.</p>
+
+        <div class="mega-button-wrap" data-reveal>
+          <div class="speech-bubble" id="speechBubble">"I don't like this."</div>
+          <button class="mega-button" id="megaButton">I don't<br>like this</button>
+        </div>
+
+        <div class="mega-button-caption" data-reveal>
+          Pressed <strong id="pressCount">0</strong> times so far. Each press is equally sincere.
+        </div>
+      </div>
+    </section>
+
+    <section class="button-info">
+      <div class="section-container">
+        <div class="section-label" data-reveal>Getting started</div>
+        <h2 data-reveal style="font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem;">How to get started</h2>
+        <p class="section-subtitle" data-reveal>A rigorous three-step onboarding process. No account required.</p>
+
+        <div class="steps">
+          <article class="card" data-reveal style="--reveal-delay: 0s">
+            <span class="card-num">Step 01</span>
+            <h3>Find something you don't like</h3>
+            <p>A website, a meeting, a group chat, this paragraph. Anything works. You probably have one in mind already.</p>
+          </article>
+          <article class="card" data-reveal style="--reveal-delay: 0.12s">
+            <span class="card-num">Step 02</span>
+            <h3>Press the button</h3>
+            <p>The button speaks on your behalf, using your device's built-in voice. Loud enough to be heard, calm enough to be legally safe.</p>
+          </article>
+          <article class="card" data-reveal style="--reveal-delay: 0.24s">
+            <span class="card-num">Step 03</span>
+            <h3>Repeat as needed</h3>
+            <p>There is no daily limit. Frequent pressers report feeling "somewhat better" and "a little judged by their coworkers."</p>
+          </article>
+        </div>
+
+        <div class="specs" data-reveal>
+          <h3>Technical specifications</h3>
+          <dl>
+            <dt>Voice</dt>
+            <dd>Your device's speech synthesis. Free-range, locally sourced.</dd>
+            <dt>Latency</dt>
+            <dd>Faster than typing "I don't like this" — we measured.</dd>
+            <dt>Battery impact</dt>
+            <dd>Negligible, unless you're going for a milestone.</dd>
+            <dt>Price</dt>
+            <dd>Free. Disapproval should never be a subscription.</dd>
+          </dl>
+        </div>
+
+        <div style="margin-top: 3rem;" data-reveal>
+          <a class="contact-back" href="/products/">← Back to Products</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/products/">Products</a>
+        <a href="/story/">Story</a>
+        <a href="/updates/">Updates</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="../script.js"></script>
+  <script>
+    (function () {
+      const btn = document.getElementById('megaButton');
+      const bubble = document.getElementById('speechBubble');
+      const pressCountEl = document.getElementById('pressCount');
+      if (!btn) return;
+
+      let presses = 0;
+      try { presses = parseInt(localStorage.getItem('idlt-button-presses'), 10) || 0; } catch (e) {}
+      pressCountEl.textContent = String(presses);
+
+      let bubbleTimer = null;
+
+      function speak() {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance("I don't like this.");
+        u.rate = 0.95;
+        u.pitch = 0.85;
+        window.speechSynthesis.speak(u);
+      }
+
+      btn.addEventListener('click', () => {
+        presses += 1;
+        try { localStorage.setItem('idlt-button-presses', String(presses)); } catch (e) {}
+        pressCountEl.textContent = String(presses);
+
+        speak();
+
+        bubble.classList.add('talking');
+        clearTimeout(bubbleTimer);
+        bubbleTimer = setTimeout(() => bubble.classList.remove('talking'), 1600);
+
+        if (window.__motion) {
+          window.__motion.animate(pressCountEl, { scale: [1.4, 1] }, { type: 'spring', stiffness: 500, damping: 14 });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
