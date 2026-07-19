@@ -1,11 +1,11 @@
-[
-    {
-        "name": "Notice",
-        "text": "Maintnence TONIGHT at 5:00PM EST. Expect errors",
-        "animation": "rolling",
-        "background": "rgba(128, 13, 55, 0.729)",
-        "textColor": "rgb(255, 251, 0)",
-        "url": "/"
-    }
+// [
+//     {
+//         "name": "Notice",
+//         "text": "Maintnence TONIGHT at 5:00PM EST. Expect errors",
+//         "animation": "rolling",
+//         "background": "rgba(128, 13, 55, 0.729)",
+//         "textColor": "rgb(255, 251, 0)",
+//         "url": "/"
+//     }
 
-] 
+// ] 
