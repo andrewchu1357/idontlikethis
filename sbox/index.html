@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The S Box — a mystery box from I Don't Like This. Still in development, price to be determined, odds fully disclosed.">
+  <title>S Box — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
+  <style>
+    .sbox-hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+    .sbox-hero .section-label { justify-content: center; }
+    .sbox-hero .section-label::before { display: none; }
+    .sbox-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .sbox-hero .subtitle { margin-bottom: 2.5rem; }
+
+    /* Price / status pill */
+    .sbox-price {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+    .sbox-price .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: sbox-pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes sbox-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+    .sbox-price s { color: var(--text-muted); opacity: 0.7; }
+
+    /* The box itself */
+    .sbox-stage {
+      display: inline-block;
+      position: relative;
+    }
+    .sbox-box {
+      width: 180px;
+      height: 180px;
+      border: 3px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 4.5rem;
+      color: var(--accent);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .sbox-box:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--border); }
+    .sbox-box:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--border); }
+    .sbox-box.shaking { animation: sbox-shake 0.4s ease; }
+    @keyframes sbox-shake {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      20% { transform: translateX(-6px) rotate(-3deg); }
+      40% { transform: translateX(6px) rotate(3deg); }
+      60% { transform: translateX(-4px) rotate(-2deg); }
+      80% { transform: translateX(4px) rotate(2deg); }
+    }
+
+    .sbox-open-hint {
+      margin-top: 1.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Reveal result */
+    .sbox-result {
+      margin-top: 2rem;
+      min-height: 3.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.3, 0.7, 0.4, 1.4);
+    }
+    .sbox-result.show { opacity: 1; transform: translateY(0); }
+    .sbox-result .won {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.9rem;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .sbox-result .tier {
+      display: block;
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      color: var(--accent);
+    }
+    .sbox-note {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Odds table */
+    .sbox-odds {
+      padding: 5rem 0 6rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    .odds-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+    }
+    .odds-table th {
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .odds-table th:last-child, .odds-table td:last-child { text-align: right; }
+    .odds-table td {
+      padding: 1rem 0.5rem;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text);
+    }
+    .odds-table tr:last-child td { border-bottom: none; }
+    .odds-table .item-name { font-weight: 600; }
+    .odds-table .item-desc {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 0.15rem;
+    }
+    .odds-chance {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .odds-tier-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .sbox-fineprint {
+      margin-top: 3rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+    .sbox-fineprint strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="/products/" aria-current="page">Products</a></li>
+            <li><a href="/story/">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="/">I Don't Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="/products/">Products</a></li>
+      <li><a href="/story/">Our Story</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="sbox-hero">
+      <div class="section-container">
+        <div class="section-label" data-reveal>Product No. 03</div>
+        <h1 data-reveal>The S Box</h1>
+        <p class="subtitle" data-reveal style="max-width: 540px; margin-left: auto; margin-right: auto;">A mystery box. You don't know what's inside, we don't fully know what's inside, and honestly that's the appeal. Open one, get something.</p>
+
+        <div data-reveal>
+          <span class="sbox-price">
+            <span class="dot"></span>
+            In development · <s>$??.??</s> Price TBD
+          </span>
+        </div>
+
+        <div class="sbox-stage" data-reveal>
+          <button class="sbox-box" id="sboxBox" aria-label="Open a demo S Box">S</button>
+        </div>
+        <p class="sbox-open-hint" data-reveal>Free demo. Tap the box to open one — no charge, no real items, no regrets.</p>
+
+        <div class="sbox-result" id="sboxResult" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="sbox-odds">
+      <div class="section-container">
+        <div class="section-label" data-reveal>Full disclosure</div>
+        <h2 data-reveal style="font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem;">Chances to win</h2>
+        <p class="section-subtitle" data-reveal>Every S Box contains exactly one item. Here's what you could pull, and how likely each one is. No hidden odds — we're a company built on honesty and mild disappointment.</p>
+
+        <table class="odds-table" data-reveal>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Tier</th>
+              <th>Chance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="item-name">The Grand Nothing</span>
+                <span class="item-desc">An empty box. The rarest prize of all — nothing, framed beautifully.</span>
+              </td>
+              <td><span class="odds-tier-tag">Mythic</span></td>
+              <td><span class="odds-chance">0.1%</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="item-name">Golden Dislike Button</span>
+                <span class="item-desc">A one-of-a-kind gilded version of our flagship product. Purely ceremonial.</span>
+              </td>
+              <td><span class="odds-tier-tag">Legendary</span></td>
+              <td><span class="odds-chance">0.9%</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="item-name">Signed Certificate of Disapproval</span>
+                <span class="item-desc">Official documentation that you, too, do not like this.</span>
+              </td>
+              <td><span class="odds-tier-tag">Epic</span></td>
+              <td><span class="odds-chance">4%</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="item-name">Enamel "Nope." Pin</span>
+                <span class="item-desc">Wearable. Discreet. Says everything you refuse to say out loud.</span>
+              </td>
+              <td><span class="odds-tier-tag">Rare</span></td>
+              <td><span class="odds-chance">15%</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="item-name">Sticker Pack</span>
+                <span class="item-desc">Three stickers of varying enthusiasm.</span>
+              </td>
+              <td><span class="odds-tier-tag">Uncommon</span></td>
+              <td><span class="odds-chance">30%</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="item-name">A Slightly Smaller S Box</span>
+                <span class="item-desc">It's boxes all the way down. Contains a coupon for another box.</span>
+              </td>
+              <td><span class="odds-tier-tag">Common</span></td>
+              <td><span class="odds-chance">50%</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="sbox-fineprint" data-reveal>
+          <strong>The fine print:</strong> The S Box is not yet for sale. Odds shown are provisional and exist mostly so the demo has something to do. No purchase necessary because no purchase is currently possible. When pricing is finalized it'll show up on the <a href="/updates/" style="color: var(--accent); border-bottom: 1px solid var(--accent);">updates page</a>. Prizes are illustrative and, like most things here, mildly disappointing on purpose.
+        </p>
+
+        <div style="margin-top: 3rem;" data-reveal>
+          <a class="contact-back" href="/products/">← Back to Products</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/products/">Products</a>
+        <a href="/story/">Story</a>
+        <a href="/updates/">Updates</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="../script.js"></script>
+  <script>
+    (function () {
+      const box = document.getElementById('sboxBox');
+      const result = document.getElementById('sboxResult');
+      if (!box || !result) return;
+
+      // Weighted prize table — chances sum to 100.
+      const prizes = [
+        { name: 'The Grand Nothing', tier: 'Mythic', chance: 0.1, note: 'An empty box. Congratulations, technically.' },
+        { name: 'Golden Dislike Button', tier: 'Legendary', chance: 0.9, note: 'One of one. Do not press in anger.' },
+        { name: 'Signed Certificate of Disapproval', tier: 'Epic', chance: 4, note: 'Suitable for framing, or not.' },
+        { name: 'Enamel "Nope." Pin', tier: 'Rare', chance: 15, note: 'Wear it with quiet confidence.' },
+        { name: 'Sticker Pack', tier: 'Uncommon', chance: 30, note: 'Three stickers. Two are fine.' },
+        { name: 'A Slightly Smaller S Box', tier: 'Common', chance: 50, note: 'It contains a coupon for another box.' }
+      ];
+
+      function draw() {
+        let roll = Math.random() * 100;
+        for (const p of prizes) {
+          if (roll < p.chance) return p;
+          roll -= p.chance;
+        }
+        return prizes[prizes.length - 1];
+      }
+
+      let busy = false;
+      box.addEventListener('click', () => {
+        if (busy) return;
+        busy = true;
+
+        result.classList.remove('show');
+        box.classList.remove('shaking');
+        // reflow so the shake animation restarts cleanly
+        void box.offsetWidth;
+        box.classList.add('shaking');
+
+        setTimeout(() => {
+          const prize = draw();
+          result.innerHTML =
+            '<div class="won">You pulled &ldquo;' + prize.name + '&rdquo;' +
+            '<span class="tier">' + prize.tier + ' · ' + prize.chance + '% chance</span></div>' +
+            '<div class="sbox-note">' + prize.note + '</div>';
+          result.classList.add('show');
+
+          if (window.__motion) {
+            window.__motion.animate(result.querySelector('.won'),
+              { scale: [1.15, 1] }, { type: 'spring', stiffness: 400, damping: 15 });
+          }
+          busy = false;
+        }, 450);
+      });
+    })();
+  </script>
+</body>
+</html>
