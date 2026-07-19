@@ -798,6 +798,45 @@ main {
   to   { opacity: 0; transform: translate(var(--px, 0), -90px) rotate(var(--pr, -12deg)); }
 }
 
+/* ── Feedback form section ── */
+.feedback-section {
+  padding: 7rem 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.feedback-section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.feedback-section .section-subtitle em {
+  font-family: var(--font-display);
+  font-size: 1.1em;
+  color: var(--text);
+}
+
+.feedback-embed {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  max-width: 760px;
+}
+
+.feedback-embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius);
+}
+
 /* ── About Section ── */
 .about-section {
   padding: 7rem 0;
