@@ -822,19 +822,20 @@ main {
 }
 
 .feedback-embed {
-  background: var(--surface);
+  /* Matches the form's own internal page color (#fafbfc) so the iframe
+     edge is invisible; the border + hard shadow frame it as one sheet. */
+  background: #fafbfc;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  padding: 1rem;
   max-width: 760px;
+  overflow: hidden;
 }
 
 .feedback-embed iframe {
   display: block;
   width: 100%;
   border: 0;
-  border-radius: var(--radius);
 }
 
 /* ── About Section ── */
