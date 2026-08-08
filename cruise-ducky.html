@@ -30,7 +30,18 @@
           --font-body:    'Space Grotesk', 'Helvetica Neue', sans-serif;
         }
 
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes subtleFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
           min-height: 100vh;
           display: flex;
@@ -40,6 +51,21 @@
           color: var(--text);
           line-height: 1.6;
           padding-top: 72px;
+          position: relative;
+        }
+
+        /* Subtle Paper Texture Overlay */
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.06;
+          pointer-events: none;
+          z-index: -1;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .site-header {
@@ -77,6 +103,7 @@
           font-style: italic;
           font-weight: 400;
           justify-self: center;
+          animation: subtleFloat 4s ease-in-out infinite;
         }
 
         .back-link {
@@ -94,6 +121,7 @@
         .back-link:hover {
             color: var(--accent);
             border-color: var(--accent);
+            background: var(--surface-2);
         }
 
         @media (max-width: 768px) {
@@ -109,6 +137,7 @@
           justify-content: center;
           text-align: center;
           padding: 0 2rem;
+          animation: fadeIn 0.8s ease-out forwards;
         }
         .hero-content { max-width: 800px; }
         .hero-kicker {
@@ -128,6 +157,11 @@
           font-size: clamp(3rem, 8vw, 6rem);
           line-height: 1;
           margin-bottom: 1.5rem;
+          transition: transform 0.4s ease;
+          cursor: default;
+        }
+        h1:hover {
+          transform: skewX(-1deg) scale(1.02);
         }
         .subtitle {
           font-size: 1.2rem;
