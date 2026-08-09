@@ -127,7 +127,7 @@ class CartUI {
     const cartCount = document.querySelector('.cart-count');
     if (cartCount) {
         cartCount.textContent = cart.getItemCount();
-        cartCount.parentElement.style.display = cart.getItemCount() > 0 ? 'block' : 'none';
+        cartCount.style.display = cart.getItemCount() > 0 ? 'inline-block' : 'none';
     }
   }
 

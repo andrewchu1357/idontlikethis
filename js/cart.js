@@ -62,6 +62,8 @@ class Cart {
     if (cartIcon) {
         cartIcon.style.display = 'block';
     }
+
+    window.dispatchEvent(new CustomEvent('cartUpdated'));
   }
 }
 
