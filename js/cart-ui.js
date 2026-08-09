@@ -20,7 +20,15 @@ class CartUI {
     this.cartIconElement = document.getElementById('cartIcon');
     
     if (this.cartIconElement) {
-      this.cartIconElement.addEventListener('click', () => this.open());
+      this.cartIconElement.addEventListener('click', () => {
+        // If the user is not on the buy-spacks page, redirect them there.
+        // If they are already there, open the cart modal.
+        if (!window.location.pathname.endsWith('buy-spacks.html')) {
+          window.location.href = '../s-packs/buy-spacks.html';
+        } else {
+          this.open();
+        }
+      });
     }
     
     window.addEventListener('cartUpdated', () => {
@@ -53,6 +61,7 @@ class CartUI {
             </div>
           </div>
           <button id="checkoutBtn" class="cta-button primary" style="width: 100%; margin-top: 1rem;">Checkout</button>
+          <button id="clearCart" class="cta-button secondary" style="width: 100%; margin-top: 0.5rem; opacity: 0.7;">Clear Cart</button>
         </div>
       </div>
     `;
@@ -70,6 +79,14 @@ class CartUI {
             return;
         }
         window.location.href = '../s-packs/buy-spacks.html';
+    });
+
+    const clearBtn = document.getElementById('clearCart');
+    clearBtn.addEventListener('click', () => {
+      if (cart.items.length === 0) return;
+      if (confirm('Are you sure you want to clear your cart?')) {
+        cart.clear();
+      }
     });
   }
 
