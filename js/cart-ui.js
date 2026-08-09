@@ -78,7 +78,7 @@ class CartUI {
             alert('Your cart is empty!');
             return;
         }
-        window.location.href = '../s-packs/buy-spacks.html';
+        window.location.href = '../checkout.html';
     });
 
     const clearBtn = document.getElementById('clearCart');

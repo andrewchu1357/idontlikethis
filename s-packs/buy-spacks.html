@@ -82,7 +82,7 @@
         <h1 data-reveal>Buy S-Packs</h1>
         <p class="lede" data-reveal>Skip the giveaway. Get your disappointment delivered directly to your doorstep.</p>
 
-        <div class="payment-section" style="max-width: 600px; margin: 2.5rem auto 0; text-align: left;">
+        <div class="product-selection-section" style="max-width: 600px; margin: 2.5rem auto 0; text-align: left;">
           <div class="card" style="padding: 2rem;">
             <h3 style="margin-top: 0;">Select Items</h3>
             
@@ -95,19 +95,12 @@
 
             <div id="orderSummary">
               <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
-                <span>Total:</span>
+                <span>Subtotal:</span>
                 <span id="orderTotal">0.00 USD</span>
               </div>
             </div>
 
-            <h3 style="margin-top: 2rem;">Payment via Crypto</h3>
-            <p style="font-size: 0.9rem; opacity: 0.7;">Send the exact amount to the address below:</p>
-            
-            <div class="crypto-address-box" style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; margin-bottom: 1.5rem; word-break: break-all; border: 1px solid rgba(255,255,255,0.1);">
-              0x1234567890abcdef1234567890abcdef12345678
-            </div>
-
-            <button id="checkoutBtn" class="cta-button primary" style="width: 100%; justify-content: center;" disabled>Confirm Purchase</button>
+            <button id="checkoutBtn" class="cta-button primary" style="width: 100%; margin-top: 1.5rem;" disabled>Proceed to Checkout</button>
             
             <div style="margin-top: 1.5rem; text-align: center;">
               <a href="../s-packs/index.html" style="font-size: 0.9rem; opacity: 0.6;">&larr; Back to S-Packs</a>
@@ -192,10 +185,10 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      initCartPage();
-      updateOrderSummary();
-      window.addEventListener('cartUpdated', updateOrderSummary);
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (!document.getElementById('checkoutBtn').disabled) {
+        window.location.href = '../checkout.html';
+      }
     });
   </script>
 </body>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout — I Don't Like This. Complete your order.">
+  <title>Checkout — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
+</head>
+<body class="bg-dark">
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="../products/">Products</a></li>
+            <li><a href="../story/">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="/">I Don't Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="../faq/">FAQ</a></li>
+            <li><a href="../contact/" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="../products/">Products</a></li>
+      <li><a href="../story/">Our Story</a></li>
+      <li><a href="../faq/">FAQ</a></li>
+      <li><a href="../contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="page-section">
+      <div class="page-card" style="max-width: 800px; margin: 0 auto;">
+        <div class="section-label" data-reveal>Checkout</div>
+        <h1 data-reveal>Review Your Order</h1>
+
+        <div id="checkoutContent">
+          <div class="checkout-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+            
+            <div class="checkout-items">
+              <h3 style="margin-bottom: 1.5rem;">Items</h3>
+              <div id="checkoutItemsList">
+                <!-- Items will be rendered here -->
+              </div>
+              <a href="../s-packs/buy-spacks.html" class="cta-button secondary" style="margin-top: 2rem; display: inline-block; width: auto;">&larr; Back to Store</a>
+            </div>
+
+            <div class="checkout-summary">
+              <div class="card" style="padding: 2rem;">
+                <h3 style="margin-top: 0;">Order Summary</h3>
+                <div id="summaryDetails" style="margin-bottom: 2rem;">
+                  <!-- Summary details will be rendered here -->
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.5rem 0;">
+
+                <h3 style="margin-bottom: 1rem;">Payment Method</h3>
+                <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 1rem;">Send the exact amount below to this address:</p>
+                <div class="crypto-address-box" style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; word-break: break-all; border: 1px solid rgba(255,255,255,0.1);">
+                  0x1234567890abcdef1234567890abcdef12345678
+                </div>
+                <button id="confirmPurchaseBtn" class="cta-button primary" style="width: 100%; margin-top: 2rem;">Complete Purchase</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="../products/">Products</a>
+        <a href="../story/">Story</a>
+        <a href="../updates/">Updates</a>
+        <a href="../faq/">FAQ</a>
+        <a href="../contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+  <script>
+    async function initCheckout() {
+      const listContainer = document.getElementById('checkoutItemsList');
+      const summaryContainer = document.getElementById('summaryDetails');
+      const checkoutBtn = document.getElementById('confirmPurchaseBtn');
+
+      if (cart.items.length === 0) {
+        document.getElementById('checkoutContent').innerHTML = `
+          <div class="page-card" style="text-align: center; padding: 3rem;">
+            <h2>Your cart is empty</h2>
+            <p>Please go back to the store to add some items.</p>
+            <a href="../s-packs/buy-spacks.html" class="cta-button primary">Go Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Render items
+      let itemsHtml = '';
+      let total = 0;
+      cart.items.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        itemsHtml += `
+          <div class="checkout-item" style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div>
+              <div style="font-weight: bold;">${item.name}</div>
+              <div style="font-size: 0.9rem; opacity: 0.7;">${item.quantity} x $${item.price.toFixed(2)}</div>
+            </div>
+            <div style="font-weight: bold;">$${itemTotal.toFixed(2)}</div>
+          </div>
+        `;
+      });
+      listContainer.innerHTML = itemsHtml;
+
+      // Render Summary
+      const currency = cart.items[0].currency || 'USD';
+      const currencySymbol = currency === 'USD' ? '$' : '';
+      summaryContainer.innerHTML = `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>Subtotal</span>
+          <span>$${total.toFixed(2)}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; margin-top: 1rem;">
+          <span>Total</span>
+          <span>$${total.toFixed(2)}</span>
+        </div>
+      `;
+
+      checkoutBtn.addEventListener('click', () => {
+        alert('Transaction simulation: Please send the exact amount to the address provided.');
+        // In a real app, this would trigger a crypto wallet connection.
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initCheckout);
+  </script>
+</body>
+</html>
