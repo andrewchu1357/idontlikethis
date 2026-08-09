@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Buy S-Packs — I Don't Like This. Secure your bundles via crypto.">
+  <title>Buy S-Packs — I Don't Like This</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('idlt-theme');
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { }
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="header-left">
+        <nav class="nav" aria-label="Left navigation">
+          <ul>
+            <li><a href="/products/">Products</a></li>
+            <li><a href="/story/">Our Story</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="logo" href="/">I Don't Like This</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Right navigation">
+          <ul>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/contact/" class="nav-contact-btn">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="/products/">Products</a></li>
+      <li><a href="/story/">Our Story</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="page-section">
+      <div class="page-card">
+        <div class="section-label" data-reveal>Secure Your Bundle</div>
+        <h1 data-reveal>Buy S-Packs</h1>
+        <p class="lede" data-reveal>Skip the giveaway. Get your disappointment delivered directly to your doorstep.</p>
+
+        <div class="payment-section" style="max-width: 500px; margin: 2.5rem auto 0; text-align: left;">
+          <div class="card" style="padding: 2rem;">
+            <h3 style="margin-top: 0;">Select Item</h3>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+              <span>1x S-Pack Bundle</span>
+              <span style="font-weight: bold;">0.005 ETH</span>
+            </div>
+
+            <h3 style="margin-top: 1.5rem;">Payment via Crypto</h3>
+            <p style="font-size: 0.9rem; opacity: 0.7;">Send the exact amount to the address below:</p>
+            
+            <div class="crypto-address-box" style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; margin-bottom: 1.5rem; word-break: break-all; border: 1px solid rgba(255,255,255,0.1);">
+              0x1234567890abcdef1234567890abcdef12345678
+            </div>
+
+            <button class="cta-button primary" style="width: 100%; justify-content: center;" onclick="alert('This is a demo. No real transaction was made.')">Confirm Purchase</button>
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <a href="../s-packs/index.html" style="font-size: 0.9rem; opacity: 0.6;">&larr; Back to S-Packs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">I Don't Like This</div>
+        <div class="footer-tagline">Made with mild disapproval.</div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/products/">Products</a>
+        <a href="/story/">Story</a>
+        <a href="/updates/">Updates</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-copy">© 2026 I Don't Like This. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="../script.js"></script>
+</body>
+</html>
