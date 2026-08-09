@@ -17,17 +17,11 @@ class CartUI {
     this.cartItemsList = document.getElementById('cartItemsList');
     this.cartTotalElement = document.getElementById('cartTotal');
     this.cartCountElement = document.querySelector('.cart-count');
-    this.cartIconElement = document.getElementById('cartIcon');
+    this.cartIconElement = document.getElementById('cartToggle');
     
     if (this.cartIconElement) {
       this.cartIconElement.addEventListener('click', () => {
-        // If the user is not on the buy-spacks page, redirect them there.
-        // If they are already there, open the cart modal.
-        if (!window.location.pathname.endsWith('buy-spacks.html')) {
-          window.location.href = '../s-packs/buy-spacks.html';
-        } else {
-          this.open();
-        }
+        this.open();
       });
     }
     
