@@ -185,11 +185,6 @@
       }
     }
 
-    document.getElementById('checkoutBtn').addEventListener('click', () => {
-      if (!document.getElementById('checkoutBtn').disabled) {
-        window.location.href = '../checkout.html';
-      }
-    });
-  </script>
+    document.addEventListener('DOMContentLoaded', initCartPage);
 </body>
 </html>
