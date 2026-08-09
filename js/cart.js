@@ -60,7 +60,7 @@ class Cart {
     
     const cartIcon = document.querySelector('.cart-icon');
     if (cartIcon) {
-        cartIcon.style.display = this.getItemCount() > 0 ? 'block' : 'none';
+        cartIcon.style.display = 'block';
     }
   }
 }

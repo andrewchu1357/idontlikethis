@@ -91,13 +91,6 @@
 
             <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
 
-            <div id="orderSummary">
-              <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
-                <span>Subtotal:</span>
-                <span id="orderTotal">0.00 USD</span>
-              </div>
-            </div>
-
             <button id="checkoutBtn" class="cta-button primary" style="width: 100%; margin-top: 1.5rem;" disabled>Proceed to Checkout</button>
             
             <div style="margin-top: 1.5rem; text-align: center;">
@@ -165,13 +158,53 @@
         const productDiv = document.createElement('div');
         productDiv.className = 'product-item';
         productDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);';
+        
+        const controlsDiv = document.createElement('div');
+        controlsDiv.className = 'product-controls';
+        controlsDiv.style.display = 'flex';
+        controlsDiv.style.alignItems = 'center';
+        controlsDiv.style.gap = '1rem';
+
+        const minusBtn = document.createElement('button');
+        minusBtn.className = 'cta-button secondary';
+        minusBtn.style.padding = '0.25rem 0.75rem';
+        minusBtn.textContent = '-';
+        minusBtn.onclick = () => {
+          const item = cart.items.find(i => i.id === product.id);
+          if (item && item.quantity > 1) {
+            cart.updateQuantity(product.id, item.quantity - 1);
+          } else if (item) {
+            cart.removeItem(product.id);
+          }
+          renderProducts();
+        };
+
+        const plusBtn = document.createElement('button');
+        plusBtn.className = 'cta-button primary';
+        plusBtn.style.padding = '0.25rem 0.75rem';
+        plusBtn.textContent = '+';
+        plusBtn.onclick = () => {
+          cart.addItem(product);
+          renderProducts();
+        };
+
+        const qtyDisplay = document.createElement('span');
+        const itemInCart = cart.items.find(i => i.id === product.id);
+        qtyDisplay.textContent = itemInCart ? itemInCart.quantity : '0';
+        qtyDisplay.style.minWidth = '1.5rem';
+        qtyDisplay.style.textAlign = 'center';
+
+        controlsDiv.appendChild(minusBtn);
+        controlsDiv.appendChild(qtyDisplay);
+        controlsDiv.appendChild(plusBtn);
+
         productDiv.innerHTML = `
           <div>
             <div style="font-weight: bold;">${product.name}</div>
             <div style="font-size: 0.8rem; opacity: 0.7;">${product.price} ${product.currency}</div>
           </div>
-          <button class="cta-button primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="addToCart('${product.id}')">Add</button>
         `;
+        productDiv.appendChild(controlsDiv);
         container.appendChild(productDiv);
       });
     }
