@@ -20,9 +20,8 @@ class CartUI {
     this.cartIconElement = document.getElementById('cartToggle');
     
     if (this.cartIconElement) {
-      this.cartIconElement.addEventListener('click', () => {
-        this.open();
-      });
+      // We no longer open the modal on click because the button is now a link to checkout.
+      // We only want the cart-count to update.
     }
     
     window.addEventListener('cartUpdated', () => {
