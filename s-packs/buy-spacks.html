@@ -20,7 +20,7 @@
     })();
   </script>
 </head>
-<body>
+<body class="bg-dark">
 
   <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -72,22 +72,33 @@
         <h1 data-reveal>Buy S-Packs</h1>
         <p class="lede" data-reveal>Skip the giveaway. Get your disappointment delivered directly to your doorstep.</p>
 
-        <div class="payment-section" style="max-width: 500px; margin: 2.5rem auto 0; text-align: left;">
+        <div class="payment-section" style="max-width: 600px; margin: 2.5rem auto 0; text-align: left;">
           <div class="card" style="padding: 2rem;">
-            <h3 style="margin-top: 0;">Select Item</h3>
-            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-              <span>1x S-Pack Bundle</span>
-              <span style="font-weight: bold;">0.005 ETH</span>
+            <h3 style="margin-top: 0;">Select Items</h3>
+            
+            <div id="productList" style="margin-bottom: 2rem;">
+              <!-- Products injected here -->
+              <p class="loading">Loading products...</p>
             </div>
 
-            <h3 style="margin-top: 1.5rem;">Payment via Crypto</h3>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
+
+            <div id="orderSummary">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
+                <span>Total:</span>
+                <span id="orderTotal">0.00 ETH</span>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Payment via Crypto</h3>
             <p style="font-size: 0.9rem; opacity: 0.7;">Send the exact amount to the address below:</p>
             
             <div class="crypto-address-box" style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; margin-bottom: 1.5rem; word-break: break-all; border: 1px solid rgba(255,255,255,0.1);">
               0x1234567890abcdef1234567890abcdef12345678
             </div>
 
-            <button class="cta-button primary" style="width: 100%; justify-content: center;" onclick="alert('This is a demo. No real transaction was made.')">Confirm Purchase</button>
+            <button id="checkoutBtn" class="cta-button primary" style="width: 100%; justify-content: center;" disabled>Confirm Purchase</button>
+            
             <div style="margin-top: 1.5rem; text-align: center;">
               <a href="../s-packs/index.html" style="font-size: 0.9rem; opacity: 0.6;">&larr; Back to S-Packs</a>
             </div>
@@ -106,7 +117,7 @@
       <nav class="footer-nav" aria-label="Footer navigation">
         <a href="../products/">Products</a>
         <a href="../story/">Story</a>
-        <a href="/updates/">Updates</a>
+        <a href="../updates/">Updates</a>
         <a href="../faq/">FAQ</a>
         <a href="../contact/">Contact</a>
       </nav>
@@ -116,6 +127,65 @@
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
+  <script src="../js/cart.js"></script>
+  <script src="../js/cart-ui.js"></script>
   <script src="../script.js"></script>
+  <script>
+    let products = [];
+
+    async function initCartPage() {
+      try {
+        const response = await fetch('../data/products.json');
+        products = await response.json();
+        renderProducts();
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+        document.getElementById('productList').innerHTML = '<p>Error loading products.</p>';
+      }
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('productList');
+      container.innerHTML = '';
+      products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product-item';
+        productDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);';
+        productDiv.innerHTML = `
+          <div>
+            <div style="font-weight: bold;">${product.name}</div>
+            <div style="font-size: 0.8rem; opacity: 0.7;">${product.price} ${product.currency}</div>
+          </div>
+          <button class="cta-button primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="addToCart('${product.id}')">Add</button>
+        `;
+        container.appendChild(productDiv);
+      });
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        cart.addItem(product);
+        updateOrderSummary();
+      }
+    }
+
+    function updateOrderSummary() {
+      const total = cart.getTotal();
+      const currency = cart.items.length > 0 ? cart.items[0].currency : 'ETH';
+      document.getElementById('orderTotal').textContent = `${total.toFixed(4)} ${currency}`;
+      
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      if (checkoutBtn) {
+        checkoutBtn.disabled = cart.items.length === 0;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initCartPage();
+      updateOrderSummary();
+      window.addEventListener('cartUpdated', updateOrderSummary);
+    });
+  </script>
 </body>
 </html>
