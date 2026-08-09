@@ -232,6 +232,8 @@
       }
     }
 
+    window.addEventListener('cartUpdated', updateOrderSummary);
+
     document.getElementById('checkoutBtn').addEventListener('click', () => {
       if (!document.getElementById('checkoutBtn').disabled) {
         window.location.href = '../checkout.html';
@@ -239,9 +241,13 @@
     });
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCartPage);
+      document.addEventListener('DOMContentLoaded', () => {
+        initCartPage();
+        updateOrderSummary();
+      });
     } else {
       initCartPage();
+      updateOrderSummary();
     }
   </script>
 </body>
