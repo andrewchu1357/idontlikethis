@@ -37,8 +37,8 @@
       <a class="logo" href="/">I Don't Like This</a>
       <div class="header-right">
         <nav class="nav" aria-label="Right navigation">
-          <ul>
-            <li><a href="../faq/">FAQ</a></li>
+          <ul
+            ><li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/" class="nav-contact-btn">Contact</a></li>
           </ul>
         </nav>
@@ -117,22 +117,25 @@
     </div>
   </footer>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  <button class="back-to-top" id="backTo-top" aria-label="Back to top">↑</button>
 
   <script src="../js/cart.js"></script>
   <script src="../js/cart-ui.js"></script>
+  <script src="../js/products-data.js"></script>
   <script>
     let products = [];
 
     async function initCartPage() {
       const listContainer = document.getElementById('productList');
       try {
-        const response = await fetch('../data/products.json');
-        if (!response.ok) throw new Error('Failed to fetch products');
-        products = await response.json();
+        if (typeof PRODUCTS_DATA !== 'undefined') {
+          products = PRODUCTS_DATA;
+        } else {
+          throw new Error('Products data not found');
+        }
         renderProducts();
       } catch (err) {
-        console.error('Failed to fetch products:', err);
+        console.error('Failed to load products:', err);
         if (listContainer) {
           listContainer.innerHTML = '<p class="error">Error loading products. Please try again later.</p>';
         }
