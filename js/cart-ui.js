@@ -5,6 +5,7 @@ class CartUI {
     this.cartTotalElement = null;
     this.cartCountElement = null;
     this.cartItemCountElement = null;
+    this.cartIconElement = null;
     this.init();
   }
 
@@ -16,6 +17,11 @@ class CartUI {
     this.cartItemsList = document.getElementById('cartItemsList');
     this.cartTotalElement = document.getElementById('cartTotal');
     this.cartCountElement = document.querySelector('.cart-count');
+    this.cartIconElement = document.getElementById('cartIcon');
+    
+    if (this.cartIconElement) {
+      this.cartIconElement.addEventListener('click', () => this.open());
+    }
     
     window.addEventListener('cartUpdated', () => {
       this.render();
@@ -98,7 +104,7 @@ class CartUI {
 
     const currency = cart.items.length > 0 ? cart.items[0].currency : 'USD';
     const total = cart.getTotal();
-    const currencySymbol = currency === 'USD' ? '$' : currency;
+    const currencySymbol = currency === 'USD' ? '$' : '';
 
     this.cartTotalElement.textContent = `${currencySymbol}${total.toFixed(2)}`;
     
