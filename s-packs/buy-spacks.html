@@ -86,7 +86,7 @@
             <div id="orderSummary">
               <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
                 <span>Total:</span>
-                <span id="orderTotal">0.00 ETH</span>
+                <span id="orderTotal">0.00 USD</span>
               </div>
             </div>
 
@@ -172,8 +172,9 @@
 
     function updateOrderSummary() {
       const total = cart.getTotal();
-      const currency = cart.items.length > 0 ? cart.items[0].currency : 'ETH';
-      document.getElementById('orderTotal').textContent = `${total.toFixed(4)} ${currency}`;
+      const currency = cart.items.length > 0 ? cart.items[0].currency : 'USD';
+      const currencySymbol = currency === 'USD' ? '$' : '';
+      document.getElementById('orderTotal').textContent = `${currencySymbol}${total.toFixed(2)} ${currency === 'USD' ? '' : currency}`;
       
       const checkoutBtn = document.getElementById('checkoutBtn');
       if (checkoutBtn) {

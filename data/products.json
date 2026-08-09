@@ -3,24 +3,24 @@
     "id": "s-pack-bundle-5",
     "name": "5 S-Pack Bundle",
     "description": "A collection of 5 different S-Packs. The ultimate way to ensure disappointment.",
-    "price": 0.025,
-    "currency": "ETH",
+    "price": 19.99,
+    "currency": "USD",
     "image": "assets/products/s-pack-bundle.png"
   },
   {
     "id": "launch-promo-card",
     "name": "S-Pack Launch Promo Card",
     "description": "Limited edition. Guaranteed to be mediocre.",
-    "price": 0.005,
-    "currency": "ETH",
+    "price": 1.00,
+    "currency": "USD",
     "image": "assets/products/launch-promo.png"
   },
   {
     "id": "s-pack-single",
     "name": "S-Pack",
     "description": "A single S-Pack. One pack, one disappointment.",
-    "price": 0.005,
-    "currency": "ETH",
+    "price": 4.59,
+    "currency": "USD",
     "image": "assets/products/s-pack.png"
   }
 ]

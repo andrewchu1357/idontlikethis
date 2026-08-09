@@ -4,11 +4,11 @@ class CartUI {
     this.cartItemsList = null;
     this.cartTotalElement = null;
     this.cartCountElement = null;
+    this.cartItemCountElement = null;
     this.init();
   }
 
   init() {
-    // Create the cart modal if it doesn't exist
     if (!document.getElementById('cartModal')) {
       this.createModal();
     }
@@ -17,7 +17,6 @@ class CartUI {
     this.cartTotalElement = document.getElementById('cartTotal');
     this.cartCountElement = document.querySelector('.cart-count');
     
-    // Listen for cart changes
     window.addEventListener('cartUpdated', () => {
       this.render();
     });
@@ -37,9 +36,15 @@ class CartUI {
           <!-- Cart items will be rendered here -->
         </div>
         <div class="cart-modal-footer">
-          <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">0.00 ETH</span>
+          <div class="cart-receipt-summary">
+            <div class="receipt-item">
+              <span>Items:</span>
+              <span id="cartItemCount">0</span>
+            </div>
+            <div class="receipt-item">
+              <span>Total:</span>
+              <span id="cartTotal">0.00 USD</span>
+            </div>
           </div>
           <button id="checkoutBtn" class="cta-button primary" style="width: 100%; margin-top: 1rem;">Checkout</button>
         </div>
@@ -76,7 +81,7 @@ class CartUI {
         itemEl.innerHTML = `
           <div class="cart-item-info">
             <span class="cart-item-name">${item.name}</span>
-            <span class="cart-item-price">${item.price} ${item.currency}</span>
+            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
             <div class="cart-item-controls">
               <button class="qty-btn decrease" data-id="${item.id}" data-qty="${item.quantity - 1}">-</button>
               <span class="qty">${item.quantity}</span>
@@ -88,13 +93,20 @@ class CartUI {
         this.cartItemsList.appendChild(itemEl);
       });
 
-      // Add event listeners to new elements
       this.attachEventListeners();
     }
 
-    this.cartTotalElement.textContent = `${cart.getTotal().toFixed(4)} ${cart.items.length > 0 ? cart.items[0].currency : 'ETH'}`;
+    const currency = cart.items.length > 0 ? cart.items[0].currency : 'USD';
+    const total = cart.getTotal();
+    const currencySymbol = currency === 'USD' ? '$' : currency;
+
+    this.cartTotalElement.textContent = `${currencySymbol}${total.toFixed(2)}`;
     
-    // Update cart icon badge
+    const itemCounter = document.getElementById('cartItemCount');
+    if (itemCounter) {
+      itemCounter.textContent = cart.getItemCount();
+    }
+
     const cartCount = document.querySelector('.cart-count');
     if (cartCount) {
         cartCount.textContent = cart.getItemCount();
@@ -124,14 +136,11 @@ class CartUI {
   }
 }
 
-// Custom event for cart updates
 window.dispatchEvent(new CustomEvent('cartUpdated'));
 
-// Initialize Cart UI
 document.addEventListener('DOMContentLoaded', () => {
   window.cartUI = new CartUI();
   
-  // Hook into cart's save method to trigger update event
   const originalSave = cart.save.bind(cart);
   cart.save = function() {
     originalSave();
