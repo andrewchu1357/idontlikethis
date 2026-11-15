@@ -20,7 +20,12 @@
   <noscript>
     <a href="Pixel%20Christmas%20(standalone).html">Pixel Christmas</a><br>
     <a href="Pixel%20North%20Pole%20(standalone).html">Pixel North Pole</a><br>
-    <a href="Pixel%20Sleigh%20Ride%20(standalone).html">Pixel Sleigh Ride</a>
+    <a href="Pixel%20Sleigh%20Ride%20(standalone).html">Pixel Sleigh Ride</a><br>
+    <a href="Pixel%20Gingerbread%20(standalone).html">Pixel Gingerbread</a><br>
+    <a href="Pixel%20Skating%20Pond%20(standalone).html">Pixel Skating Pond</a><br>
+    <a href="Pixel%20Carolers%20(standalone).html">Pixel Carolers</a><br>
+    <a href="Pixel%20Rooftop%20(standalone).html">Pixel Rooftop</a><br>
+    <a href="Pixel%20Holiday%20Train%20(standalone).html">Pixel Holiday Train</a>
   </noscript>
 
   <script>
@@ -33,7 +38,12 @@
     var SCENES = [
       { src: 'Pixel Christmas (standalone).html',   dur: 32.5 },
       { src: 'Pixel North Pole (standalone).html',  dur: 34.5 },
-      { src: 'Pixel Sleigh Ride (standalone).html', dur: 31 }
+      { src: 'Pixel Sleigh Ride (standalone).html', dur: 31 },
+      { src: 'Pixel Gingerbread (standalone).html', dur: 34.5 },
+      { src: 'Pixel Skating Pond (standalone).html', dur: 33.5 },
+      { src: 'Pixel Carolers (standalone).html',    dur: 32 },
+      { src: 'Pixel Rooftop (standalone).html',     dur: 34.5 },
+      { src: 'Pixel Holiday Train (standalone).html', dur: 34 }
     ];
 
     var PRELOAD_LEAD = 10;      // start loading the next page this many seconds before the switch
@@ -74,6 +84,16 @@
       return doc.querySelector(STAGE_SEL);
     }
 
+    // Hide the page's own playback bar (play/pause, scrubber, download).
+    function hideControls(frame) {
+      var doc = frame.contentDocument;
+      if (!doc || doc.getElementById('host-hide-controls')) return;
+      var st = doc.createElement('style');
+      st.id = 'host-hide-controls';
+      st.textContent = '[data-omelette-chrome]{display:none!important}';
+      (doc.head || doc.documentElement).appendChild(st);
+    }
+
     // Pause the page's animation on time t (seconds).
     function seek(frame, t) {
       var s = stageOf(frame), w = frame.contentWindow;
@@ -99,6 +119,7 @@
         (function poll() {
           var s = stageOf(frame, staleDoc);
           if (s) {
+            hideControls(frame);
             // Give React a moment to attach its listeners before seeking.
             setTimeout(function () {
               seek(frame, 0);
