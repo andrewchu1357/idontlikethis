@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pixel Christmas</title>
   <style>
-    html, body { margin: 0; height: 100%; background: #05071a; overflow: hidden; }
+    html, body { margin: 0; height: 100%; background: #090d28; overflow: hidden; cursor: pointer; }
+    /* Clicks go to this page (not the animation) so a click/tap can toggle fullscreen. */
     iframe {
       position: fixed; inset: 0; width: 100%; height: 100%;
       border: 0; opacity: 0; pointer-events: none;
     }
-    iframe.on { opacity: 1; pointer-events: auto; }
+    iframe.on { opacity: 1; }
     noscript a { color: #ffd447; font: 16px/1.6 -apple-system, BlinkMacSystemFont, sans-serif; }
   </style>
 </head>
@@ -84,15 +85,41 @@
       return doc.querySelector(STAGE_SEL);
     }
 
-    // Hide the page's own playback bar (play/pause, scrubber, download).
-    function hideControls(frame) {
-      var doc = frame.contentDocument;
-      if (!doc || doc.getElementById('host-hide-controls')) return;
-      var st = doc.createElement('style');
-      st.id = 'host-hide-controls';
-      st.textContent = '[data-omelette-chrome]{display:none!important}';
-      (doc.head || doc.documentElement).appendChild(st);
+    // Restyle the page: hide its playback bar (play/pause, scrubber,
+    // download) and scale the 1280x720 stage to cover the whole window,
+    // cropping the overflow instead of letterboxing it with black bars.
+    function fitFrame(frame) {
+      var doc;
+      try { doc = frame.contentDocument; } catch (e) { return; }
+      if (!doc || !doc.querySelector(STAGE_SEL)) return;
+      var w = frame.clientWidth || window.innerWidth, h = frame.clientHeight || window.innerHeight;
+      var scale = Math.max(w / 1280, h / 720) + 0.002;
+      var st = doc.getElementById('host-fit');
+      if (!st) {
+        st = doc.createElement('style');
+        st.id = 'host-fit';
+        (doc.head || doc.documentElement).appendChild(st);
+      }
+      st.textContent =
+        '[data-omelette-chrome]{display:none!important}' +
+        '[data-om-starter]{background:#090d28!important}' +
+        STAGE_SEL + '{transform:scale(' + scale.toFixed(4) + ')!important;box-shadow:none!important}';
     }
+
+    window.addEventListener('resize', function () { frames.forEach(fitFrame); });
+
+    // Click / tap / F toggles browser fullscreen (browsers only allow it after a user gesture).
+    function toggleFullscreen() {
+      var d = document, el = d.documentElement;
+      var full = d.fullscreenElement || d.webkitFullscreenElement;
+      try {
+        if (full) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+        else if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      } catch (e) {}
+    }
+    document.addEventListener('click', toggleFullscreen);
+    document.addEventListener('keydown', function (e) { if (e.key === 'f' || e.key === 'F') toggleFullscreen(); });
 
     // Pause the page's animation on time t (seconds).
     function seek(frame, t) {
@@ -119,7 +146,7 @@
         (function poll() {
           var s = stageOf(frame, staleDoc);
           if (s) {
-            hideControls(frame);
+            fitFrame(frame);
             // Give React a moment to attach its listeners before seeking.
             setTimeout(function () {
               seek(frame, 0);
